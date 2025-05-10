@@ -1,9 +1,15 @@
 import requests
 import argparse
 
-re = None
-js = []
+re = None 
+js = [] # json
 def set_username(username):
+    """
+    Set the username to be used in the API request.
+    Args:
+        username (str): The GitHub username to set.
+    """
+
     try:
         global re, js
         re = requests.get(f"https://api.github.com/users/{username}/events")
@@ -14,6 +20,10 @@ def set_username(username):
         print(re.status_code)
 
 def get_newest_push():
+    """
+    Get the newest push event for the user.
+    """
+
     probably_new = 0
     is_there = False
     while probably_new < len(js):
@@ -31,6 +41,11 @@ def get_newest_push():
 
 
 def get_n_pushes():
+    """
+    Get the newest n push events for the user.
+
+    """
+    
     n = int(input("Enter number of pushes: "))
     counter = 0
     i = 0
@@ -45,6 +60,9 @@ def get_n_pushes():
             break
 
 def get_commits_of_id_push():
+    """
+    Get the commits of a specific push id.
+    """
     id_push = int(input("Enter id push: "))
     i = 0
     found = False
@@ -63,12 +81,19 @@ def get_commits_of_id_push():
 
 
 def get_info():
+    """
+    Get the information of the user.
+    """
+
     print(f"    ID: {js[0]['actor']['id']}")
     print(f"    Username: {js[0]['actor']['login']}")
     print(f"    URL: {js[0]['actor']['url']}")
     print(f"    Image: {js[0]['actor']['avatar_url']}")
 
 def get_newest_creates():
+    """
+    Get the newest create event for the user.
+    """
     probably_new = 0
     is_there = False
     while probably_new < len(js):
@@ -86,6 +111,9 @@ def get_newest_creates():
 
 
 def get_n_creates():
+    """
+    Get the newest n create events for the user.
+    """
     n = int(input("Enter number of creates: "))
     counter = 0
     i = 0
